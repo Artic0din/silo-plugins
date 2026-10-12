@@ -1310,7 +1310,7 @@
     {
       "manifest": {
         "plugin_id": "silo.mdblist",
-        "version": "0.4.0",
+        "version": "0.5.0",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -1331,7 +1331,7 @@
             "type": "metadata_provider.v1",
             "id": "mdblist",
             "display_name": "MDBList",
-            "description": "Ratings from every source MDBList aggregates, age rating, certification, and missing basics. Enrichment only — never identifies an item.",
+            "description": "IMDb, TMDB and Rotten Tomatoes ratings, MDBList's own score, age rating, certification, and missing basics. Enrichment only — never identifies an item.",
             "metadata": {
               "bulk_lookup_limit": 100,
               "default_priority": {
@@ -1341,6 +1341,28 @@
               "lookup_provider_ids": [
                 "imdb",
                 "tmdb"
+              ],
+              "rating_sources": [
+                {
+                  "id": "rt_critic",
+                  "label": "Rotten Tomatoes critics",
+                  "name": "RT",
+                  "percent": true,
+                  "scale": 100
+                },
+                {
+                  "id": "rt_audience",
+                  "label": "Rotten Tomatoes audience",
+                  "name": "RT Audience",
+                  "percent": true,
+                  "scale": 100
+                },
+                {
+                  "id": "mdblist",
+                  "label": "MDBList score",
+                  "name": "MDBList",
+                  "scale": 100
+                }
               ]
             }
           }
@@ -1368,8 +1390,8 @@
         ],
         "presentation": {
           "display_name": "MDBList Ratings",
-          "summary": "Ratings from every major source, age ratings, and missing basics from MDBList.",
-          "description_markdown": "Fills in what other metadata providers leave empty: IMDb, TMDB, Rotten Tomatoes critic and audience, Metacritic, Letterboxd, Trakt, Roger Ebert, and MyAnimeList ratings, MDBList's own score, the Common Sense age rating, the release certification, and basics such as year, release date, runtime, language, genres, and show status.\n\nThis provider never identifies an item. It looks up titles that another provider has already matched, using the IMDb or TMDB ID that provider resolved, so it must sit *below* a primary metadata provider such as TMDB in a library's provider chain.",
+          "summary": "IMDb, TMDB and Rotten Tomatoes ratings, MDBList's own score, age ratings, and missing basics from MDBList.",
+          "description_markdown": "Fills in what other metadata providers leave empty: IMDb and TMDB ratings, the Rotten Tomatoes critic and audience scores, MDBList's own score, the Common Sense age rating, the release certification, and basics such as year, release date, runtime, language, genres, and show status.\n\nSilo shows the Rotten Tomatoes scores and the MDBList score only after an administrator turns them on under Settings \u003e Library \u0026 Metadata \u003e Ratings.\n\nThis provider never identifies an item. It looks up titles that another provider has already matched, using the IMDb or TMDB ID that provider resolved, so it must sit *below* a primary metadata provider such as TMDB in a library's provider chain.",
           "setup_markdown": "Create a free API key in your MDBList preferences, add it below, then add **MDBList** to a library's metadata provider chain at a lower priority than your primary provider.\n\nThe free tier allows 1000 requests per day. Lookups that arrive together are sent as one batch request, and Silo's hourly Bulk Metadata Enrichment task sends up to 100 titles at a time. When the quota runs out the plugin pauses until it resets and tells Silo so, and Silo looks those titles up again later; it never fails a metadata refresh.",
           "homepage_url": "https://mdblist.com",
           "source_url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist",
@@ -1381,16 +1403,16 @@
         }
       },
       "repo_url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist",
-      "checksums_url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.4.0/checksums.txt",
+      "checksums_url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.5.0/checksums.txt",
       "binaries": {
         "darwin/arm64": {
-          "url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.4.0/plugin-darwin-arm64"
+          "url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.5.0/plugin-darwin-arm64"
         },
         "linux/amd64": {
-          "url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.4.0/plugin-linux-amd64"
+          "url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.5.0/plugin-linux-amd64"
         },
         "linux/arm64": {
-          "url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.4.0/plugin-linux-arm64"
+          "url": "https://github.com/Silo-Server/silo-plugin-metadata-mdblist/releases/download/v0.5.0/plugin-linux-arm64"
         }
       }
     },
